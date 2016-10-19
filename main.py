@@ -37,7 +37,7 @@ def point2():
 
 
 def resize_image(resultSizeSample, image):
-    # return cv.resize(image, (newWidth, newHeight))
+    # return cv.resize(image, (669, 325))
     newHeight, newWidth = resultSizeSample.shape[:2]
     originalHeight, originalWidth = image.shape[:2]
     xScallingFactor = newWidth * 1.0 / originalWidth
@@ -69,7 +69,7 @@ def resize_image(resultSizeSample, image):
                 if i > 255:
                     i = 255
                 resultSizeSample[y][x] = i
-        print x, " out of ", newWidth - 1
+        print "column", x, " out of ", newWidth - 1
     return resultSizeSample
 
 
@@ -93,8 +93,8 @@ def point4():
     l3_image = cv.imread("L3.jpg", 0)
     l3_height, l3_width = l3_image.shape[:2]
 
-    cv.namedWindow("Point 3", cv.WINDOW_NORMAL)
-    cv.imshow("Point 3", l3_image)
+    cv.namedWindow("Point 4", cv.WINDOW_NORMAL)
+    cv.imshow("Point 4", l3_image)
     cv.waitKey(0)
 
 
