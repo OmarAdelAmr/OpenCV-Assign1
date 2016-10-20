@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-import time
 
 
 def point1():
@@ -132,20 +131,18 @@ def point5():
     l4_image = cv.imread("L4.jpg", 0)
     l4_height, l4_width = l4_image.shape[:2]
     result = np.zeros((l4_height, l4_width), np.uint8)
-    oldVals = np.matrix([[65, 475, 1], [1000, 135, 1], [5, 5, 1]])
-    newX = np.matrix([[5], [1008], [5]])
-    newY = np.matrix([[480], [5], [5]])
-    affineMat = calculateAffineMAtrix(oldVals, newX, newY)
-    for x in range(0, l4_width):
-        for y in range(0, l4_height):
-            dest = affineMat * np.matrix([[x], [y], [1]])
-            newX = dest[0][0]
-            newY = dest[1][0]
-            if newX < l4_width and newX >= 0 and newY < l4_height and newY >= 0:
-                result[int(newY)][int(newX)] = l4_image[y, x]
-
-        print "Column", x, "out of ", l4_width
-
+    sourcePoints = np.array([[50.0, 55], [190, 20], [190, 150], [50, 185]])
+    endPoints = np.array([[0.0, 0], [145, 0], [145, 130], [0, 130]])
+    h, status = cv.findHomography(sourcePoints, endPoints)
+    result = cv.warpPerspective(l4_image, h, (l4_image.shape[1], l4_image.shape[0]))
+    # for x in range(0, l4_width):
+    #     for y in range(0, l4_height):
+    #         dest = h * np.matrix([[x], [y], [1]])
+    #         newX = dest[0][0]
+    #         newY = dest[1][0]
+    #         if newX < l4_width and newX >= 0 and newY < l4_height and newY >= 0:
+    #             result[int(newY)][int(newX)] = l4_image[y, x]
+    #     print x
     cv.namedWindow("Point 5", cv.WINDOW_NORMAL)
     cv.imshow("Point 5", result)
     cv.waitKey(0)
