@@ -3,7 +3,7 @@ import numpy as np
 
 
 def point1():
-    l1_image = cv.imread("L1.jpg", 0)
+    l1_image = cv.imread("L1.jpg")
     height, width = l1_image.shape[:2]
     result = np.zeros((height, width), np.uint8)
     for i in range(0, height):
@@ -202,7 +202,7 @@ def main():
         point5()
 
 
-point4()
+point1()
 # main()
 # x, y, z = bilinearInterpolation()
 # print x
